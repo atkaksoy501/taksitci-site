@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taksitçi — Destek / Support</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1c1c1e; --muted: #6e6e73; --bg: #ffffff; --card: #f2f2f7; --accent: #3b6cff; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f7; --muted: #98989d; --bg: #000; --card: #1c1c1e; } }
+  body { margin: 0; font: 17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 30px; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 28px 0 8px; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .lang { display: flex; gap: 8px; margin: 20px 0 8px; }
+  .lang button { border: 0; background: var(--card); color: var(--fg); padding: 8px 14px; border-radius: 999px; font: inherit; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  section[hidden] { display: none; }
+  a { color: var(--accent); }
+  details { background: var(--card); border-radius: 14px; padding: 10px 16px; margin: 8px 0; }
+  summary { cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Taksitçi</h1>
+  <div class="meta">Destek · Support · <a href="privacy.html">Gizlilik / Privacy</a></div>
+  <div class="lang">
+    <button id="btn-tr" aria-pressed="true" onclick="show('tr')">Türkçe</button>
+    <button id="btn-en" aria-pressed="false" onclick="show('en')">English</button>
+  </div>
+
+  <section id="tr">
+    <p>Kredi kartı taksitlerini tek yerden takip et: bu ay ne ödeyeceğin, önümüzdeki aylarda ne geleceği, hangi kartın ekstresinde ne var.</p>
+    <h2>İletişim</h2>
+    <p>Soru, hata bildirimi ve öneriler için: <a href="mailto:caramel-creels3n@icloud.com?subject=Taksit%C3%A7i">caramel-creels3n@icloud.com</a>. Hata bildirirken Ayarlar › Hakkında › "Tanılama günlüğünü paylaş" ile oluşan dosyayı eklersen daha hızlı çözülür (taksit verisi içermez).</p>
+    <h2>Sık sorulanlar</h2>
+    <details><summary>Taksitler nasıl "ödendi" olur?</summary><p>Tamamen elle: taksit detayında aya dokun, ya da kart detayında / Taksitler'de "Ekstre ödendi" ile o ayın tüm taksitlerini tek seferde işaretle. İşaretlenmemiş geçmiş ay "gecikmiş" görünür.</p></details>
+    <details><summary>Verim nerede?</summary><p>Cihazında. iCloud hesabın açıksa cihazların arasında otomatik eşitlenir; Ayarlar'dan JSON/CSV dışa aktarabilirsin. Geliştirici verine erişemez.</p></details>
+    <details><summary>Toplu veri nasıl yüklerim?</summary><p>Ayarlar › Veri › Dışa aktar › "CSV · tablo" boş şablonu verir (veri yokken); doldurup İçe aktar › "CSV · tablo" ile yükle. Sütunlar: Banka, Kart, Başlık, Kategori, Tutar, Adet, İlkAy (yyyy-AA), Not.</p></details>
+    <details><summary>Bildirimler ne zaman gelir?</summary><p>Ay başı özet seçtiğin gün/saatte; kart hatırlatması karta girdiğin tahmini son ödeme gününden N gün önce. Kart detayında her ay için gerçek günü girebilirsin.</p></details>
+    <details><summary>Nakit ayrılmış kategorisi ne?</summary><p>Parası zaten kenarda olan taksitler. Ayarlar'daki anahtarla toplamlara dahil edip çıkarabilirsin.</p></details>
+  </section>
+
+  <section id="en" hidden>
+    <p>Track your credit card installments in one place: what you pay this month, what's coming next, and what's on each card's statement.</p>
+    <h2>Contact</h2>
+    <p>Questions, bug reports and suggestions: <a href="mailto:caramel-creels3n@icloud.com?subject=Taksit%C3%A7i">caramel-creels3n@icloud.com</a>. For bugs, attaching the file from Settings › About › "Share diagnostics log" helps (it contains no installment data).</p>
+    <h2>FAQ</h2>
+    <details><summary>How do installments get marked paid?</summary><p>Manually: tap a month in the installment detail, or use "Statement paid" in the card detail / Installments list to mark a whole month at once. Unmarked past months show as overdue.</p></details>
+    <details><summary>Where is my data?</summary><p>On your device. With an iCloud account it syncs between your devices automatically; you can also export JSON/CSV from Settings. The developer cannot access your data.</p></details>
+    <details><summary>How do I import many installments?</summary><p>Settings › Data › Export › "CSV · table" gives an empty template (when there is no data); fill it in and load it with Import › "CSV · table". Columns: Bank, Card, Title, Category, Amount, Count, FirstMonth (yyyy-MM), Note.</p></details>
+    <details><summary>When do notifications arrive?</summary><p>The monthly summary on the day/time you choose; card reminders N days before the card's estimated due day. You can enter the exact day per month in the card detail.</p></details>
+    <details><summary>What is "cash reserved"?</summary><p>Installments whose money is already set aside. The toggle in Settings includes or excludes them from totals.</p></details>
+  </section>
+</main>
+<script>
+  function show(l) {
+    for (const x of ['tr', 'en']) {
+      document.getElementById(x).hidden = x !== l;
+      document.getElementById('btn-' + x).setAttribute('aria-pressed', x === l);
+    }
+    document.documentElement.lang = l;
+  }
+  if ((navigator.language || '').toLowerCase().startsWith('en')) show('en');
+</script>
+</body>
+</html>

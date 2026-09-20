@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taksitçi — Gizlilik Politikası / Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1c1c1e; --muted: #6e6e73; --bg: #ffffff; --card: #f2f2f7; --accent: #3b6cff; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f7; --muted: #98989d; --bg: #000; --card: #1c1c1e; } }
+  body { margin: 0; font: 17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 30px; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 28px 0 8px; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .lang { display: flex; gap: 8px; margin: 20px 0 8px; }
+  .lang button { border: 0; background: var(--card); color: var(--fg); padding: 8px 14px; border-radius: 999px; font: inherit; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  section[hidden] { display: none; }
+  ul { padding-left: 22px; }
+  a { color: var(--accent); }
+  .card { background: var(--card); border-radius: 16px; padding: 14px 18px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Taksitçi</h1>
+  <div class="meta">Gizlilik Politikası · Privacy Policy · Son güncelleme / Last updated: 2026-09-20</div>
+  <div class="lang">
+    <button id="btn-tr" aria-pressed="true" onclick="show('tr')">Türkçe</button>
+    <button id="btn-en" aria-pressed="false" onclick="show('en')">English</button>
+  </div>
+
+  <section id="tr">
+    <p class="card">Kısaca: Taksitçi verilerini toplamaz, satmaz, reklam ya da analitik servisine göndermez. Verin cihazında ve senin iCloud hesabında kalır.</p>
+
+    <h2>Hangi veriler saklanır?</h2>
+    <p>Uygulamaya girdiğin banka, kart ve taksit bilgileri (başlık, tutar, adet, tarih, ödendi işaretleri, isteğe bağlı peşin fiyat ve notlar) ile uygulama ayarları. Bu veriler cihazında uygulamanın kendi alanında (App Group) saklanır.</p>
+
+    <h2>iCloud</h2>
+    <ul>
+      <li><strong>Senkron:</strong> iCloud hesabın açıksa veriler Apple'ın CloudKit altyapısı üzerinden, yalnızca sana ait özel veritabanında (private database) cihazların arasında eşitlenir. Geliştirici bu verilere erişemez.</li>
+      <li><strong>Dışa aktarma:</strong> Ayarlar'dan JSON/CSV dosyası olarak dışa aktarabilirsin; dosya senin seçtiğin yere kaydedilir.</li>
+    </ul>
+
+    <h2>Bildirimler</h2>
+    <p>Ay başı özet ve kart son ödeme hatırlatmaları tamamen cihazda planlanan yerel bildirimlerdir; sunucuya veri gitmez.</p>
+
+    <h2>Banka logoları</h2>
+    <p>Bir bankaya alan adı girip "Logoyu internetten çek" dediğinde, yalnızca o alan adı Google Favicon servisine (<code>google.com/s2/favicons</code>) ve gerekirse DuckDuckGo ikon servisine gönderilir. Taksit verisi gönderilmez. Bu işlev isteğe bağlıdır; galeriden kendi görselini de seçebilirsin.</p>
+
+    <h2>Tanılama</h2>
+    <p>Apple MetricKit çökme/donma raporları ve uygulama günlükleri yalnızca cihazında tutulur. "Tanılama günlüğünü paylaş" ile sen paylaşmadıkça hiçbir yere gönderilmez; paket taksit verisi içermez.</p>
+
+    <h2>Toplamadıklarımız</h2>
+    <ul>
+      <li>Reklam, takip (tracking) ya da analitik SDK'sı yok.</li>
+      <li>Hesap, e-posta, konum, kişi, fotoğraf verisi toplanmaz (logo için seçtiğin fotoğraf yalnızca cihazda küçültülüp saklanır).</li>
+      <li>Üçüncü taraf sunucu yok.</li>
+    </ul>
+
+    <h2>Verini silme</h2>
+    <p>Ayarlar › Veri › "Tüm veriyi sil" cihazdaki ve (senkron açıksa) iCloud'daki veriyi siler. Uygulamayı kaldırmak cihazdaki veriyi siler; iCloud'daki kopya diğer cihazlarında ve iCloud ayarlarında kalır.</p>
+
+    <h2>Çocuklar</h2>
+    <p>Uygulama 13 yaş altına yönelik değildir ve çocuklardan bilerek veri toplamaz.</p>
+
+    <h2>Değişiklikler ve iletişim</h2>
+    <p>Bu politika değişirse bu sayfa güncellenir. Sorular için: <a href="mailto:caramel-creels3n@icloud.com">caramel-creels3n@icloud.com</a></p>
+  </section>
+
+  <section id="en" hidden>
+    <p class="card">In short: Taksitçi does not collect, sell or send your data to any advertising or analytics service. Your data stays on your device and in your own iCloud account.</p>
+
+    <h2>What is stored?</h2>
+    <p>The bank, card and installment details you enter (title, amount, count, dates, paid marks, optional cash price and notes) and app settings. They are stored on your device in the app's own container (App Group).</p>
+
+    <h2>iCloud</h2>
+    <ul>
+      <li><strong>Sync:</strong> When your iCloud account is available, data is synced between your devices through Apple's CloudKit, in your private database only. The developer cannot access it.</li>
+      <li><strong>Export:</strong> You can export a JSON/CSV file from Settings; it is saved wherever you choose.</li>
+    </ul>
+
+    <h2>Notifications</h2>
+    <p>Monthly summaries and card due-date reminders are local notifications scheduled entirely on the device; nothing is sent to a server.</p>
+
+    <h2>Bank logos</h2>
+    <p>When you enter a domain for a bank and tap "Fetch logo from the web", only that domain is sent to Google's favicon service (<code>google.com/s2/favicons</code>) and, if needed, DuckDuckGo's icon service. No installment data is sent. This is optional; you can pick your own image from Photos instead.</p>
+
+    <h2>Diagnostics</h2>
+    <p>Apple MetricKit crash/hang reports and app logs are kept on your device only. Nothing is sent anywhere unless you share it yourself via "Share diagnostics log"; the bundle contains no installment data.</p>
+
+    <h2>What we don't collect</h2>
+    <ul>
+      <li>No advertising, tracking or analytics SDKs.</li>
+      <li>No account, email, location, contacts or photo data (a photo you pick for a logo is resized and stored on the device only).</li>
+      <li>No third-party servers.</li>
+    </ul>
+
+    <h2>Deleting your data</h2>
+    <p>Settings › Data › "Delete all data" removes data on the device and, with sync on, in iCloud. Uninstalling the app deletes on-device data; the iCloud copy remains on your other devices and in your iCloud settings.</p>
+
+    <h2>Children</h2>
+    <p>The app is not directed at children under 13 and does not knowingly collect data from them.</p>
+
+    <h2>Changes and contact</h2>
+    <p>If this policy changes, this page is updated. Questions: <a href="mailto:caramel-creels3n@icloud.com">caramel-creels3n@icloud.com</a></p>
+  </section>
+</main>
+<script>
+  function show(l) {
+    for (const x of ['tr', 'en']) {
+      document.getElementById(x).hidden = x !== l;
+      document.getElementById('btn-' + x).setAttribute('aria-pressed', x === l);
+    }
+    document.documentElement.lang = l;
+  }
+  if ((navigator.language || '').toLowerCase().startsWith('en')) show('en');
+</script>
+</body>
+</html>
