@@ -24,7 +24,7 @@
 <body>
 <main>
   <h1>Taksitçi</h1>
-  <div class="meta">Gizlilik Politikası · Privacy Policy · Son güncelleme / Last updated: 2026-09-20</div>
+  <div class="meta">Gizlilik Politikası · Privacy Policy · Son güncelleme / Last updated: 2026-09-23</div>
   <div class="lang">
     <button id="btn-tr" aria-pressed="true" onclick="show('tr')">Türkçe</button>
     <button id="btn-en" aria-pressed="false" onclick="show('en')">English</button>
@@ -48,6 +48,10 @@
     <h2>Banka logoları</h2>
     <p>Bir bankaya alan adı girip "Logoyu internetten çek" dediğinde, yalnızca o alan adı Google Favicon servisine (<code>google.com/s2/favicons</code>) ve gerekirse DuckDuckGo ikon servisine gönderilir. Taksit verisi gönderilmez. Bu işlev isteğe bağlıdır; galeriden kendi görselini de seçebilirsin.</p>
 
+    <h2>Enflasyon verisi</h2>
+    <p>Reel değer hesapları için uygulama, günde en fazla bir kez, bu sitede yayımlanan herkese açık TÜFE veri dosyasını (<code>data/tufe.json</code>) indirir. İstek parametresiz ve çerezsizdir; kişisel veri, cihaz kimliği ya da taksit bilgisi içermez. Site GitHub Pages üzerinde barınır; GitHub her web isteğinde olduğu gibi IP adresini kısa süreli sunucu kayıtlarında tutabilir.</p>
+    <h2>Gelir ve bütçe</h2>
+    <p>Alsam? için isteğe bağlı olarak girdiğin aylık gelir, taksit bütçesi ve enflasyon tahmini yalnızca cihazında saklanır. iCloud senkronu açtıysan bu ayarlar Apple'ın iCloud anahtar-değer deposu üzerinden kendi cihazlarına taşınır; geliştirici erişemez.</p>
     <h2>Tanılama</h2>
     <p>Apple MetricKit çökme/donma raporları ve uygulama günlükleri yalnızca cihazında tutulur. "Tanılama günlüğünü paylaş" ile sen paylaşmadıkça hiçbir yere gönderilmez; paket taksit verisi içermez.</p>
 
@@ -55,7 +59,7 @@
     <ul>
       <li>Reklam, takip (tracking) ya da analitik SDK'sı yok.</li>
       <li>Hesap, e-posta, konum, kişi, fotoğraf verisi toplanmaz (logo için seçtiğin fotoğraf yalnızca cihazda küçültülüp saklanır).</li>
-      <li>Üçüncü taraf sunucu yok.</li>
+      <li>Kendi sunucumuz yok; uygulama yalnızca yukarıda anlatılan herkese açık dosyaları indirir.</li>
     </ul>
 
     <h2>Verini silme</h2>
@@ -86,6 +90,10 @@
     <h2>Bank logos</h2>
     <p>When you enter a domain for a bank and tap "Fetch logo from the web", only that domain is sent to Google's favicon service (<code>google.com/s2/favicons</code>) and, if needed, DuckDuckGo's icon service. No installment data is sent. This is optional; you can pick your own image from Photos instead.</p>
 
+    <h2>Inflation data</h2>
+    <p>For real-value calculations the app downloads, at most once a day, the public CPI data file published on this site (<code>data/tufe.json</code>). The request has no parameters and no cookies; it contains no personal data, device identifier or installment data. The site is hosted on GitHub Pages; as with any web request, GitHub may keep your IP address in short-lived server logs.</p>
+    <h2>Income and budget</h2>
+    <p>The monthly income, installment budget and inflation estimate you may enter for Alsam? are stored on your device only. If you turned on iCloud sync, these settings move to your own devices through Apple's iCloud key-value storage; the developer cannot access them.</p>
     <h2>Diagnostics</h2>
     <p>Apple MetricKit crash/hang reports and app logs are kept on your device only. Nothing is sent anywhere unless you share it yourself via "Share diagnostics log"; the bundle contains no installment data.</p>
 
@@ -93,7 +101,7 @@
     <ul>
       <li>No advertising, tracking or analytics SDKs.</li>
       <li>No account, email, location, contacts or photo data (a photo you pick for a logo is resized and stored on the device only).</li>
-      <li>No third-party servers.</li>
+      <li>We run no servers of our own; the app only downloads the public files described above.</li>
     </ul>
 
     <h2>Deleting your data</h2>
