@@ -6,7 +6,8 @@ Geçmişi yeniden yazmaz: yalnızca CSV'nin son ayından sonraki aylar eklenir. 
 Ortam değişkenleri:
   EVDS_API_KEY             zorunlu (GitHub secret). İstek başlığında gönderilir.
   EVDS_BASE                API kökü. Varsayılan: https://evds3.tcmb.gov.tr/igmevdsms-dis   (doğrulandı: anahtar başlığı istiyor)
-  EVDS_CPI_SERIES          TÜFE genel endeks serisi. Varsayılan: TP.FG.J0                   (DOĞRULA: 2025=100 kodu)
+  EVDS_CPI_SERIES          TÜFE genel endeks serisi. Varsayılan: TP.TUKFIY2025.GENEL (2025=100; eski TP.FG.J0
+                           2003=100 serisi Ocak 2026'da arşive alındı)
   EVDS_EXPECTATION_SERIES  Piyasa Katılımcıları Anketi 12 ay sonrası TÜFE beklentisi serisi.
                            Boşsa expectation.json elle güncellenir.                        (DOĞRULA)
 
@@ -31,14 +32,21 @@ def env(name, default=None):
     return os.environ.get(name) or default
 
 
-def evds(series, start, end, formula=None):
+CPI_SERIES = "TP.TUKFIY2025.GENEL"
+
+
+def fetch(series, start, end, formula=None):
     base = env("EVDS_BASE", "https://evds3.tcmb.gov.tr/igmevdsms-dis").rstrip("/")
     q = f"series={series}&startDate={start:%d-%m-%Y}&endDate={end:%d-%m-%Y}&type=json&frequency=5"
     if formula is not None:
         q += f"&formulas={formula}"
     req = urllib.request.Request(f"{base}/{q}", headers={"key": os.environ["EVDS_API_KEY"], "User-Agent": "taksitci-tufe"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        items = json.load(r).get("items", [])
+        return json.load(r)
+
+
+def evds(series, start, end, formula=None):
+    items = fetch(series, start, end, formula).get("items", [])
     prefix = series.replace(".", "_")
     out = []
     for it in items:
@@ -62,7 +70,8 @@ def check():
     with open(CSV, newline="") as f:
         rows = list(csv.DictReader(f))[-3:]
     first = dt.date(*(int(x) for x in rows[0]["month"].split("-")), 1)
-    got = dict(evds(env("EVDS_CPI_SERIES", "TP.FG.J0"), first, dt.date.today(), formula=1))
+    series = env("EVDS_CPI_SERIES", CPI_SERIES)
+    got = dict(evds(series, first, dt.date.today(), formula=1))
     off = 0
     for r in rows:
         y, m = (int(x) for x in r["month"].split("-"))
@@ -71,7 +80,13 @@ def check():
         off += not ok
         print(f"{r['month']}: CSV %{ours:.2f} · EVDS {'—' if theirs is None else f'%{theirs:.2f}'} {'✓' if ok else '✗'}")
     if off:
-        sys.exit(f"{off} ay tutmuyor: EVDS_CPI_SERIES ya da formül yanlış olabilir")
+        if not got:
+            raw = fetch(series, first, dt.date.today(), formula=1)
+            items = raw.get("items", [])
+            print(f"EVDS cevabı: anahtarlar {sorted(raw)}, totalCount {raw.get('totalCount')}, {len(items)} kayıt")
+            for it in items[:2]:
+                print("  ", it)
+        sys.exit(f"{off} ay tutmuyor: EVDS_CPI_SERIES ({series}) ya da formül yanlış olabilir")
 
 
 def main():
@@ -84,7 +99,7 @@ def main():
     start = dt.date(y + (m == 12), m % 12 + 1, 1)
     today = dt.date.today()
 
-    series = env("EVDS_CPI_SERIES", "TP.FG.J0")
+    series = env("EVDS_CPI_SERIES", CPI_SERIES)
     new = [(ym, v) for ym, v in evds(series, start, today, formula=1) if ym > last]
     for (a, _), (b, _) in zip([(last, 0)] + new, new):
         ya, ma = divmod(a, 100)
