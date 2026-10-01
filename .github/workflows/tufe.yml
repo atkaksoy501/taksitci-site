@@ -7,6 +7,11 @@ on:
     # TÜİK TÜFE'yi ayın 3'ünde, TCMB anketi ayın ~20'sinde yayımlar.
     - cron: "0 7 4,21 * *"
   workflow_dispatch:
+    inputs:
+      check:
+        description: "Yalnızca kontrol: son üç ayı EVDS ile karşılaştır, dosya yazma (ana branch dışında hep böyle)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -39,12 +44,12 @@ jobs:
           EVDS_API_KEY: ${{ secrets.EVDS_API_KEY }}
           EVDS_CPI_SERIES: ${{ vars.EVDS_CPI_SERIES }}
           EVDS_EXPECTATION_SERIES: ${{ vars.EVDS_EXPECTATION_SERIES }}
-        run: python3 tools/tufe/fetch_evds.py
+        run: python3 tools/tufe/fetch_evds.py ${{ (inputs.check || github.ref != 'refs/heads/main') && '--check' || '' }}
       - name: data/tufe.json üret ve doğrula
-        if: steps.key.outputs.ready == 'true'
+        if: steps.key.outputs.ready == 'true' && !inputs.check && github.ref == 'refs/heads/main'
         run: python3 tools/tufe/make_tufe.py data/tufe.json
       - name: Değiştiyse commit et
-        if: steps.key.outputs.ready == 'true'
+        if: steps.key.outputs.ready == 'true' && !inputs.check && github.ref == 'refs/heads/main'
         run: |
           if git diff --quiet -- tools/tufe data/tufe.json; then
             echo "Değişiklik yok"

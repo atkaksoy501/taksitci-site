@@ -70,6 +70,15 @@ def validate(doc):
     assert size < 256 * 1024, f"dosya çok büyük: {size}"
 
 
+def unchanged(path, doc):
+    try:
+        old = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return False
+    strip = lambda d: {k: v for k, v in d.items() if k != "generatedAt"}
+    return strip(old) == strip(doc)
+
+
 def main():
     rows = load_monthly(HERE / "tufe_monthly.csv")
     expectation = json.loads((HERE / "expectation.json").read_text())
@@ -78,6 +87,10 @@ def main():
     outs = [pathlib.Path(p) for p in sys.argv[1:]] or DEFAULT_OUT
     text = json.dumps(doc, ensure_ascii=False, separators=(",", ":")) + "\n"
     for out in outs:
+        # Veri aynıysa dosyaya dokunma: yalnız generatedAt değişip Action boş commit atmasın.
+        if unchanged(out, doc):
+            print(f"= {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}  değişmedi")
+            continue
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(text)
         print(f"→ {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}  son ay {doc['cpi']['points'][-1]['m']}, beklenti %{expectation['annual12m']*100:.2f}")

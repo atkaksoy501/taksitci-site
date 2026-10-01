@@ -11,6 +11,7 @@ Ortam değişkenleri:
                            Boşsa expectation.json elle güncellenir.                        (DOĞRULA)
 
 formulas=1 → bir önceki döneme göre yüzde değişim (aylık %).
+--check: son üç ayı EVDS ile karşılaştırır, dosya yazmaz.
 """
 import csv
 import datetime as dt
@@ -56,9 +57,28 @@ def last_csv_month():
     return int(y) * 100 + int(m)
 
 
+def check():
+    """Kontrol: CSV'deki son üç ayı EVDS'ten çekip karşılaştırır (anahtar ve seri kodu doğru mu). Dosya yazmaz."""
+    with open(CSV, newline="") as f:
+        rows = list(csv.DictReader(f))[-3:]
+    first = dt.date(*(int(x) for x in rows[0]["month"].split("-")), 1)
+    got = dict(evds(env("EVDS_CPI_SERIES", "TP.FG.J0"), first, dt.date.today(), formula=1))
+    off = 0
+    for r in rows:
+        y, m = (int(x) for x in r["month"].split("-"))
+        ours, theirs = float(r["monthly_pct"]), got.get(y * 100 + m)
+        ok = theirs is not None and abs(ours - theirs) < 0.05
+        off += not ok
+        print(f"{r['month']}: CSV %{ours:.2f} · EVDS {'—' if theirs is None else f'%{theirs:.2f}'} {'✓' if ok else '✗'}")
+    if off:
+        sys.exit(f"{off} ay tutmuyor: EVDS_CPI_SERIES ya da formül yanlış olabilir")
+
+
 def main():
     if not os.environ.get("EVDS_API_KEY"):
         sys.exit("EVDS_API_KEY yok")
+    if "--check" in sys.argv:
+        return check()
     last = last_csv_month()
     y, m = divmod(last, 100)
     start = dt.date(y + (m == 12), m % 12 + 1, 1)
