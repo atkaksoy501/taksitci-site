@@ -1,0 +1,57 @@
+# taksitci-site reposuna .github/workflows/tufe.yml olarak kopyalanır.
+# Betikler site reposunda tools/tufe/ altında durur (bu repodaki scripts/tufe/ ile aynı dosyalar).
+name: TÜFE verisi
+
+on:
+  schedule:
+    # TÜİK TÜFE'yi ayın 3'ünde, TCMB anketi ayın ~20'sinde yayımlar.
+    - cron: "0 7 4,21 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      # Anahtar yoksa iş kırmızı olmaz: uyarı verip atlar (site eldeki tufe.json'u sunmaya devam eder).
+      - name: EVDS anahtarı var mı
+        id: key
+        env:
+          EVDS_API_KEY: ${{ secrets.EVDS_API_KEY }}
+        run: |
+          if [ -z "$EVDS_API_KEY" ]; then
+            echo "::warning::EVDS_API_KEY secret'ı yok; TÜFE güncellemesi atlandı (Settings › Secrets and variables › Actions)."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.key.outputs.ready == 'true'
+      - uses: actions/setup-python@v5
+        if: steps.key.outputs.ready == 'true'
+        with:
+          python-version: "3.12"
+      - name: EVDS'ten yeni ayları çek
+        if: steps.key.outputs.ready == 'true'
+        env:
+          EVDS_API_KEY: ${{ secrets.EVDS_API_KEY }}
+          EVDS_CPI_SERIES: ${{ vars.EVDS_CPI_SERIES }}
+          EVDS_EXPECTATION_SERIES: ${{ vars.EVDS_EXPECTATION_SERIES }}
+        run: python3 tools/tufe/fetch_evds.py
+      - name: data/tufe.json üret ve doğrula
+        if: steps.key.outputs.ready == 'true'
+        run: python3 tools/tufe/make_tufe.py data/tufe.json
+      - name: Değiştiyse commit et
+        if: steps.key.outputs.ready == 'true'
+        run: |
+          if git diff --quiet -- tools/tufe data/tufe.json; then
+            echo "Değişiklik yok"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/tufe data/tufe.json
+          git commit -m "TÜFE verisi güncellendi"
+          git push
