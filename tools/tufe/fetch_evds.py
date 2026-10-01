@@ -5,7 +5,7 @@ Geçmişi yeniden yazmaz: yalnızca CSV'nin son ayından sonraki aylar eklenir. 
 
 Ortam değişkenleri:
   EVDS_API_KEY             zorunlu (GitHub secret). İstek başlığında gönderilir.
-  EVDS_BASE                API kökü. Varsayılan: https://evds3.tcmb.gov.tr/igmevdsms-dis   (DOĞRULA)
+  EVDS_BASE                API kökü. Varsayılan: https://evds3.tcmb.gov.tr/igmevdsms-dis   (doğrulandı: anahtar başlığı istiyor)
   EVDS_CPI_SERIES          TÜFE genel endeks serisi. Varsayılan: TP.FG.J0                   (DOĞRULA: 2025=100 kodu)
   EVDS_EXPECTATION_SERIES  Piyasa Katılımcıları Anketi 12 ay sonrası TÜFE beklentisi serisi.
                            Boşsa expectation.json elle güncellenir.                        (DOĞRULA)
@@ -25,8 +25,13 @@ CSV = HERE / "tufe_monthly.csv"
 EXPECTATION = HERE / "expectation.json"
 
 
+def env(name, default=None):
+    """Boş değer de tanımsız sayılır: Actions'ta tanımlanmamış repo değişkeni boş metin olarak gelir."""
+    return os.environ.get(name) or default
+
+
 def evds(series, start, end, formula=None):
-    base = os.environ.get("EVDS_BASE", "https://evds3.tcmb.gov.tr/igmevdsms-dis").rstrip("/")
+    base = env("EVDS_BASE", "https://evds3.tcmb.gov.tr/igmevdsms-dis").rstrip("/")
     q = f"series={series}&startDate={start:%d-%m-%Y}&endDate={end:%d-%m-%Y}&type=json&frequency=5"
     if formula is not None:
         q += f"&formulas={formula}"
@@ -59,7 +64,7 @@ def main():
     start = dt.date(y + (m == 12), m % 12 + 1, 1)
     today = dt.date.today()
 
-    series = os.environ.get("EVDS_CPI_SERIES", "TP.FG.J0")
+    series = env("EVDS_CPI_SERIES", "TP.FG.J0")
     new = [(ym, v) for ym, v in evds(series, start, today, formula=1) if ym > last]
     for (a, _), (b, _) in zip([(last, 0)] + new, new):
         ya, ma = divmod(a, 100)
@@ -74,7 +79,7 @@ def main():
     else:
         print("TÜFE: yeni ay yok")
 
-    exp_series = os.environ.get("EVDS_EXPECTATION_SERIES")
+    exp_series = env("EVDS_EXPECTATION_SERIES")
     if exp_series:
         vals = evds(exp_series, today - dt.timedelta(days=120), today)
         if vals:
