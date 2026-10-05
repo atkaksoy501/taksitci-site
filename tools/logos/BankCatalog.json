@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "note": "Marka renkleri yaklaşıktır (logo yokken baş harf rozeti için). appStoreId, bankanın kendi App Store uygulamasının kimliğidir (2026-10-04'te iTunes aramasıyla bulundu, satıcı adı ve bundleId'ye bakılarak seçildi); yoksa banka logo paketine girmez.",
+  "banks": [
+    {
+      "id": "garanti-bbva",
+      "name": "Garanti BBVA",
+      "domain": "garantibbva.com.tr",
+      "colorHex": "#1C8C4E",
+      "aliases": [
+        "Garanti",
+        "Garanti Bankası"
+      ],
+      "appStoreId": 521117624
+    },
+    {
+      "id": "is-bankasi",
+      "name": "İş Bankası",
+      "domain": "isbank.com.tr",
+      "colorHex": "#0B3D91",
+      "aliases": [
+        "Türkiye İş Bankası",
+        "İşbank",
+        "Isbank"
+      ],
+      "appStoreId": 308261752
+    },
+    {
+      "id": "akbank",
+      "name": "Akbank",
+      "domain": "akbank.com",
+      "colorHex": "#E4002B",
+      "appStoreId": 560516360
+    },
+    {
+      "id": "yapi-kredi",
+      "name": "Yapı Kredi",
+      "domain": "yapikredi.com.tr",
+      "colorHex": "#004A8F",
+      "aliases": [
+        "Yapı Kredi Bankası"
+      ],
+      "appStoreId": 458627086
+    },
+    {
+      "id": "ziraat",
+      "name": "Ziraat Bankası",
+      "domain": "ziraatbank.com.tr",
+      "colorHex": "#D2232A",
+      "aliases": [
+        "Ziraat"
+      ],
+      "appStoreId": 885993234
+    },
+    {
+      "id": "halkbank",
+      "name": "Halkbank",
+      "domain": "halkbank.com.tr",
+      "colorHex": "#0066B3",
+      "aliases": [
+        "Halk Bankası"
+      ],
+      "appStoreId": 1068841746
+    },
+    {
+      "id": "vakifbank",
+      "name": "VakıfBank",
+      "domain": "vakifbank.com.tr",
+      "colorHex": "#E5A800",
+      "aliases": [
+        "Vakıflar Bankası",
+        "Vakıf Bank"
+      ],
+      "appStoreId": 853569450
+    },
+    {
+      "id": "qnb",
+      "name": "QNB",
+      "domain": "qnb.com.tr",
+      "colorHex": "#6C1D5F",
+      "aliases": [
+        "QNB Finansbank",
+        "Finansbank"
+      ],
+      "appStoreId": 739655617
+    },
+    {
+      "id": "denizbank",
+      "name": "DenizBank",
+      "domain": "denizbank.com",
+      "colorHex": "#0072CE",
+      "aliases": [
+        "Deniz Bank"
+      ],
+      "appStoreId": 1403334281
+    },
+    {
+      "id": "ing",
+      "name": "ING",
+      "domain": "ing.com.tr",
+      "colorHex": "#FF6200",
+      "aliases": [
+        "ING Bank"
+      ],
+      "appStoreId": 395535459
+    },
+    {
+      "id": "teb",
+      "name": "TEB",
+      "domain": "teb.com.tr",
+      "colorHex": "#00834E",
+      "aliases": [
+        "Türk Ekonomi Bankası"
+      ],
+      "appStoreId": 353385550
+    },
+    {
+      "id": "enpara",
+      "name": "Enpara",
+      "domain": "enpara.com",
+      "colorHex": "#7A1FA2",
+      "aliases": [
+        "Enpara.com"
+      ],
+      "appStoreId": 6711348553
+    },
+    {
+      "id": "odeabank",
+      "name": "Odeabank",
+      "domain": "odeabank.com.tr",
+      "colorHex": "#C8102E",
+      "aliases": [
+        "Odea"
+      ],
+      "appStoreId": 634414038
+    },
+    {
+      "id": "sekerbank",
+      "name": "Şekerbank",
+      "domain": "sekerbank.com.tr",
+      "colorHex": "#D71920",
+      "aliases": [
+        "Şeker Bank"
+      ],
+      "appStoreId": 626133531
+    },
+    {
+      "id": "alternatif",
+      "name": "Alternatif Bank",
+      "domain": "alternatifbank.com.tr",
+      "colorHex": "#00A0DF",
+      "aliases": [
+        "ABank"
+      ],
+      "appStoreId": 6453521320
+    },
+    {
+      "id": "anadolubank",
+      "name": "Anadolubank",
+      "domain": "anadolubank.com.tr",
+      "colorHex": "#0054A6",
+      "aliases": [
+        "Anadolu Bank"
+      ],
+      "appStoreId": 1441752495
+    },
+    {
+      "id": "fibabanka",
+      "name": "Fibabanka",
+      "domain": "fibabanka.com.tr",
+      "colorHex": "#F28C00",
+      "aliases": [
+        "Fiba"
+      ],
+      "appStoreId": 1489574086
+    },
+    {
+      "id": "hsbc",
+      "name": "HSBC",
+      "domain": "hsbc.com.tr",
+      "colorHex": "#DB0011",
+      "aliases": [
+        "HSBC Türkiye"
+      ],
+      "appStoreId": 1339127709
+    },
+    {
+      "id": "burgan",
+      "name": "Burgan Bank",
+      "domain": "burgan.com.tr",
+      "colorHex": "#00539B",
+      "aliases": [
+        "Burgan"
+      ],
+      "appStoreId": 1234503652
+    },
+    {
+      "id": "icbc",
+      "name": "ICBC Turkey",
+      "domain": "icbc.com.tr",
+      "colorHex": "#C8102E",
+      "aliases": [
+        "ICBC"
+      ],
+      "appStoreId": 1438010678
+    },
+    {
+      "id": "aktif-bank",
+      "name": "Aktif Bank",
+      "domain": "aktifbank.com.tr",
+      "colorHex": "#E30613",
+      "aliases": [
+        "Aktifbank"
+      ]
+    },
+    {
+      "id": "albaraka",
+      "name": "Albaraka Türk",
+      "domain": "albaraka.com.tr",
+      "colorHex": "#00844D",
+      "aliases": [
+        "Albaraka"
+      ],
+      "appStoreId": 1428860724
+    },
+    {
+      "id": "kuveyt-turk",
+      "name": "Kuveyt Türk",
+      "domain": "kuveytturk.com.tr",
+      "colorHex": "#00843D",
+      "aliases": [
+        "Kuveyt Türk Katılım"
+      ],
+      "appStoreId": 840914223
+    },
+    {
+      "id": "turkiye-finans",
+      "name": "Türkiye Finans",
+      "domain": "turkiyefinans.com.tr",
+      "colorHex": "#00A19B",
+      "aliases": [
+        "Türkiye Finans Katılım"
+      ],
+      "appStoreId": 634936591
+    },
+    {
+      "id": "vakif-katilim",
+      "name": "Vakıf Katılım",
+      "domain": "vakifkatilim.com.tr",
+      "colorHex": "#00843D",
+      "appStoreId": 1144383102
+    },
+    {
+      "id": "ziraat-katilim",
+      "name": "Ziraat Katılım",
+      "domain": "ziraatkatilim.com.tr",
+      "colorHex": "#D2232A",
+      "appStoreId": 1181873648
+    }
+  ]
+}
