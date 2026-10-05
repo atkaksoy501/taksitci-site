@@ -59,6 +59,11 @@ def validate(doc):
     pts = doc["cpi"]["points"]
     assert doc["schemaVersion"] == 1
     assert pts, "boş seri"
+    # Uygulama geçersiz ayda çöker: ilk nokta, son nokta ve anket ayı da denetlenir (YearMonth 2000...2100, ay 1...12).
+    months = [p["m"] for p in pts] + [doc["expectation"]["surveyMonth"]]
+    bad = [m for m in months if not (2000 <= m // 100 <= 2100 and 1 <= m % 100 <= 12)]
+    assert not bad, f"geçersiz ay: {bad}"
+    assert pts[0]["v"] > 0, f"pozitif değil: {pts[0]['m']}"
     for a, b in zip(pts, pts[1:]):
         ya, ma = divmod(a["m"], 100)
         yb, mb = divmod(b["m"], 100)
